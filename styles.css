@@ -1,0 +1,110 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+#board {
+    /* text-align: center; */
+    display: grid;
+    grid-template: repeat(3, 120px) / repeat(3, 120px);
+    height: 359px;
+    width: 359px;
+    border: 1px solid black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+
+    grid-template-areas:  
+    "a b c"
+    "d e f"
+    "g h i"
+}
+
+#one, #two, #three, #four, #five, #six, #seven, #eight, #nine {
+    /* background-color: rgba(128, 128, 128, 0.452); */
+    font-size: 88px;
+    padding-top: 8px;
+    font-family: monospace;
+    cursor: default;
+    /* border-bottom: solid black 1px; */
+} 
+
+#one {
+    grid-area: a;
+    border: solid black .1px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+}
+
+#two {
+    grid-area: b;
+    /* background-color: rgba(128, 128, 128, 0.452);  */
+    border: solid black .1px;
+    border-top: none;
+    border-right: none;
+    text-align: center;
+}
+
+#three {
+    grid-area: c;
+    border: solid black .1px;
+    border-top: none;
+    border-right: none;
+    text-align: center;
+}
+
+#four {
+    grid-area: d;
+    border: solid black .1px;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+}
+
+#five {
+    grid-area: e;
+    border: solid black .1px;
+    border-top: none;
+    border-right: none;
+    text-align: center;
+}
+
+#six {
+    grid-area: f;
+    border: solid black .1px;
+    border-top: none;
+    border-right: none;
+    text-align: center;
+}
+
+#seven {
+    grid-area: g;
+    border: solid black .1px;
+    border-top: none;
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+}
+
+#eight {
+    grid-area: h;
+    border: solid black .1px;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    text-align: center;
+}
+
+#nine {
+    grid-area: i;
+    border: solid black .1px;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+    text-align: center;
+    
+}
