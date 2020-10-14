@@ -1,7 +1,7 @@
 //store the gameboard as an array inside of a Gameboard object
-//players are stored in objects
 //tuck everything inside of a factory function
-//
+
+//as an option, make the player choose X or O to play
 
  //const Gameboard = (function(){
 
@@ -26,66 +26,68 @@
             if (counter % 2 === 0) {
             e.target.textContent = markerO
             counter = 0;
+            
         } else if (counter % 2 !== 0) {
             e.target.textContent = markerX;
             counter = 1;
+            
         }
     }
-        //console.log(e.target.textContent)
-        // console.log(dataEl.length);
-        // console.log(e.target.textContent)
-        for (let i = 0; i < positionArr.length; i++) {
+ 
+        for (let i = 0; i < positionArr.length; i++) {    
+        positionArr[i] = container.children[i].textContent
             
-           
-            
-        positionArr[i] = e.target.textContent
-        //container.children[i].textContent
-            if (positionArr[i] == markerX) {
-
-            } else if (positionArr[i] == markerO) {
-            }
         }
 
-        //fill the positionArr with the corresponding numbers to its indexes
+        winCondition('O');
+        winCondition('X', container.style.pointerEvent);
         
-    })      
+    }) 
+
+    function winCondition(marker, event) {
+        if (!positionArr.includes('')) {
+
+           console.log ('Its a tie')
+           return `Its a tie`
+       } else {
+       // let winCond1 = [positionArr[0].includes(marker), positionArr[1].includes(marker), positionArr[2].includes(marker)]
+        if (positionArr[0].includes(marker) && positionArr[1].includes(marker) && positionArr[2].includes(marker)) {
+             console.log(`${marker} wins`)
+             event = 'none'
+             //container.disabled = true;
+            return false;
+            //`${marker} wins` //make a pop-up window with ${marker} wins
+        } else if (positionArr[0].includes(marker) && positionArr[3].includes(marker) && positionArr[6].includes(marker)) {
+            console.log(`${marker} wins`)
+            container.style.pointerEvent = 'none'
+           return `${marker} wins`
+       } else if (positionArr[1].includes(marker) && positionArr[4].includes(marker) && positionArr[7].includes(marker)) {
+        console.log(`${marker} wins`)
+        return `${marker} wins`
+       } else if (positionArr[2].includes(marker) && positionArr[5].includes(marker) && positionArr[8].includes(marker)) {
+        console.log(`${marker} wins`)
+        return `${marker} wins`
+       } else if (positionArr[3].includes(marker) && positionArr[4].includes(marker) && positionArr[5].includes(marker)) {
+        console.log(`${marker} wins`)
+        return `${marker} wins`
+       } else if (positionArr[6].includes(marker) && positionArr[7].includes(marker) && positionArr[8].includes(marker)) {
+        console.log(`${marker} wins`)
+        return `${marker} wins`
+       } else if (positionArr[0].includes(marker) && positionArr[4].includes(marker) && positionArr[8].includes(marker)) {
+        console.log(`${marker} wins`)
+        return `${marker} wins`
+       } else if (positionArr[2].includes(marker) && positionArr[4].includes(marker) && positionArr[6].includes(marker)) {
+        console.log(`${marker} wins`)
+        return `${marker} wins`
+       } 
+    }
+       
+    }
     
-    allDivs.forEach(square => square.addEventListener('click', function(e){
+
+    // allDivs.forEach(square => square.addEventListener('click', function(e){
          
-        // if (counter % 2 === 0) {
-        //     e.target.textContent = markerO
-        // } else if (counter % 2 !== 0) {
-        //     e.target.textContent = markerX;
-        // }
-
-        //when a marker is cicked, make the array take this marker inside
-        //at the correct index position, corresponding to the board.
-        // markers.forEach(marker => {
-        //     e.target.textContent = marker;    
-        //     if (e.target.innerHTML) {
-        //      e.target.textContent = marker;
-        //      console.log(marker)
-        //     }        
-        // })
-        //positionArr.push(e.target.textContent);
-
-       // console.log(e.target)
-        // for (let i = 0; i < allDivs.length; i++) {
-        //     positionArr[i] = square.textContent;
-        //     console.log(positionArr)
-        // }
-
-        console.log(container.children[1].textContent)
-        
-        //if the counter is even - put first marker, otherwise second
-        // positionArr.forEach((position, index) => {
-        //     let sliced = positionArr.slice(index)
-        //     sliced.push(square.textContent);
-        //         //container.children.textContent)
-        // })
-
-   //console.log(square.textContent);
-    }))
+    // }))
 
 
 
