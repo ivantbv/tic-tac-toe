@@ -6,15 +6,34 @@
  //const Gameboard = (function(){
 
     
-    let container = document.querySelector('#board');
-    let allDivs = document.querySelectorAll('#board div')
-    let markers = ['O', 'X'];
-    let markerX = 'X'
-    let markerO = 'O'
+    const container = document.querySelector('.board');
+    const allDivs = document.querySelectorAll('#board div')
+    //let markers = ['O', 'X'];
+    const vsDiv = document.querySelector('.versus')
+    const vsComputer = document.querySelector('.AI');
+    const vsPlayer = document.querySelector('.player');
+    const emptyDiv = document.querySelector('.empty');
+    //const emptyDiv2 = document.querySelector('.another-empty')
+    const markerX = 'X'
+    const markerO = 'O'
     let counter = 0;
     let positionArr = ['','','',
                        '','','',
                        '','',''];
+
+    vsPlayer.addEventListener('click', () => {
+        container.classList.toggle('removed')
+    emptyDiv.classList.toggle('removed')
+    vsDiv.classList.toggle('removed')
+
+    })
+    
+    const playerTurnText = document.createElement('span')
+    emptyDiv.appendChild(playerTurnText);
+    playerTurnText.textContent = 'X turn'
+
+    container.classList.toggle('removed')
+    emptyDiv.classList.toggle('removed')
 
     container.addEventListener('click', (e) => {
         //let dataEl = document.querySelectorAll(`div[data-num]`)
@@ -26,11 +45,14 @@
             if (counter % 2 === 0) {
             e.target.textContent = markerO
             counter = 0;
-            
+            playerTurnText.textContent = 'X turn'
+            emptyDiv.appendChild(playerTurnText);
         } else if (counter % 2 !== 0) {
             e.target.textContent = markerX;
             counter = 1;
             
+            playerTurnText.textContent = 'O turn'
+            emptyDiv.appendChild(playerTurnText)
         }
     }
  
@@ -39,46 +61,43 @@
             
         }
 
-        winCondition('O');
-        winCondition('X', container.style.pointerEvent);
+        winCondition(markerO);
+        winCondition(markerX);
         
     }) 
-
+    
     function winCondition(marker, event) {
         if (!positionArr.includes('')) {
 
-           console.log ('Its a tie')
-           return `Its a tie`
+            playerTurnText.textContent = 'Its a tie'
+           return
        } else {
        // let winCond1 = [positionArr[0].includes(marker), positionArr[1].includes(marker), positionArr[2].includes(marker)]
         if (positionArr[0].includes(marker) && positionArr[1].includes(marker) && positionArr[2].includes(marker)) {
-             console.log(`${marker} wins`)
-             event = 'none'
-             //container.disabled = true;
-            return false;
+             playerTurnText.textContent = `${marker} wins`
+             return;
             //`${marker} wins` //make a pop-up window with ${marker} wins
         } else if (positionArr[0].includes(marker) && positionArr[3].includes(marker) && positionArr[6].includes(marker)) {
-            console.log(`${marker} wins`)
-            container.style.pointerEvent = 'none'
-           return `${marker} wins`
+            playerTurnText.textContent = `${marker} wins`
+            return;
        } else if (positionArr[1].includes(marker) && positionArr[4].includes(marker) && positionArr[7].includes(marker)) {
-        console.log(`${marker} wins`)
-        return `${marker} wins`
+        playerTurnText.textContent = `${marker} wins`
+        return
        } else if (positionArr[2].includes(marker) && positionArr[5].includes(marker) && positionArr[8].includes(marker)) {
-        console.log(`${marker} wins`)
-        return `${marker} wins`
+        playerTurnText.textContent = `${marker} wins`
+        return 
        } else if (positionArr[3].includes(marker) && positionArr[4].includes(marker) && positionArr[5].includes(marker)) {
-        console.log(`${marker} wins`)
-        return `${marker} wins`
+        playerTurnText.textContent = `${marker} wins`
+        return
        } else if (positionArr[6].includes(marker) && positionArr[7].includes(marker) && positionArr[8].includes(marker)) {
-        console.log(`${marker} wins`)
-        return `${marker} wins`
+        playerTurnText.textContent = `${marker} wins`
+        return 
        } else if (positionArr[0].includes(marker) && positionArr[4].includes(marker) && positionArr[8].includes(marker)) {
-        console.log(`${marker} wins`)
-        return `${marker} wins`
+        playerTurnText.textContent = `${marker} wins`
+        return 
        } else if (positionArr[2].includes(marker) && positionArr[4].includes(marker) && positionArr[6].includes(marker)) {
-        console.log(`${marker} wins`)
-        return `${marker} wins`
+        playerTurnText.textContent = `${marker} wins`
+        return 
        } 
     }
        
