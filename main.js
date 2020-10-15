@@ -1,20 +1,39 @@
 //store the gameboard as an array inside of a Gameboard object
-//players are stored in objects
 //tuck everything inside of a factory function
-//
+
+//as an option, make the player choose X or O to play
 
  //const Gameboard = (function(){
 
     
-    let container = document.querySelector('#board');
-    let allDivs = document.querySelectorAll('#board div')
-    let markers = ['O', 'X'];
-    let markerX = 'X'
-    let markerO = 'O'
+    const container = document.querySelector('.board');
+    const allDivs = document.querySelectorAll('#board div')
+    //let markers = ['O', 'X'];
+    const vsDiv = document.querySelector('.versus')
+    const vsComputer = document.querySelector('.AI');
+    const vsPlayer = document.querySelector('.player');
+    const emptyDiv = document.querySelector('.empty');
+    //const emptyDiv2 = document.querySelector('.another-empty')
+    const markerX = 'X'
+    const markerO = 'O'
     let counter = 0;
     let positionArr = ['','','',
                        '','','',
                        '','',''];
+
+    vsPlayer.addEventListener('click', () => {
+        container.classList.toggle('removed')
+    emptyDiv.classList.toggle('removed')
+    vsDiv.classList.toggle('removed')
+
+    })
+    
+    const playerTurnText = document.createElement('span')
+    emptyDiv.appendChild(playerTurnText);
+    playerTurnText.textContent = 'X turn'
+
+    container.classList.toggle('removed')
+    emptyDiv.classList.toggle('removed')
 
     container.addEventListener('click', (e) => {
         //let dataEl = document.querySelectorAll(`div[data-num]`)
@@ -26,66 +45,68 @@
             if (counter % 2 === 0) {
             e.target.textContent = markerO
             counter = 0;
+            playerTurnText.textContent = 'X turn'
+            emptyDiv.appendChild(playerTurnText);
         } else if (counter % 2 !== 0) {
             e.target.textContent = markerX;
             counter = 1;
+            
+            playerTurnText.textContent = 'O turn'
+            emptyDiv.appendChild(playerTurnText)
         }
     }
-        //console.log(e.target.textContent)
-        // console.log(dataEl.length);
-        // console.log(e.target.textContent)
-        for (let i = 0; i < positionArr.length; i++) {
+ 
+        for (let i = 0; i < positionArr.length; i++) {    
+        positionArr[i] = container.children[i].textContent
             
-           
-            
-        positionArr[i] = e.target.textContent
-        //container.children[i].textContent
-            if (positionArr[i] == markerX) {
-
-            } else if (positionArr[i] == markerO) {
-            }
         }
 
-        //fill the positionArr with the corresponding numbers to its indexes
+        winCondition(markerO);
+        winCondition(markerX);
         
-    })      
+    }) 
     
-    allDivs.forEach(square => square.addEventListener('click', function(e){
+    function winCondition(marker, event) {
+        if (!positionArr.includes('')) {
+
+            playerTurnText.textContent = 'Its a tie'
+           return
+       } else {
+       // let winCond1 = [positionArr[0].includes(marker), positionArr[1].includes(marker), positionArr[2].includes(marker)]
+        if (positionArr[0].includes(marker) && positionArr[1].includes(marker) && positionArr[2].includes(marker)) {
+             playerTurnText.textContent = `${marker} wins`
+             return;
+            //`${marker} wins` //make a pop-up window with ${marker} wins
+        } else if (positionArr[0].includes(marker) && positionArr[3].includes(marker) && positionArr[6].includes(marker)) {
+            playerTurnText.textContent = `${marker} wins`
+            return;
+       } else if (positionArr[1].includes(marker) && positionArr[4].includes(marker) && positionArr[7].includes(marker)) {
+        playerTurnText.textContent = `${marker} wins`
+        return
+       } else if (positionArr[2].includes(marker) && positionArr[5].includes(marker) && positionArr[8].includes(marker)) {
+        playerTurnText.textContent = `${marker} wins`
+        return 
+       } else if (positionArr[3].includes(marker) && positionArr[4].includes(marker) && positionArr[5].includes(marker)) {
+        playerTurnText.textContent = `${marker} wins`
+        return
+       } else if (positionArr[6].includes(marker) && positionArr[7].includes(marker) && positionArr[8].includes(marker)) {
+        playerTurnText.textContent = `${marker} wins`
+        return 
+       } else if (positionArr[0].includes(marker) && positionArr[4].includes(marker) && positionArr[8].includes(marker)) {
+        playerTurnText.textContent = `${marker} wins`
+        return 
+       } else if (positionArr[2].includes(marker) && positionArr[4].includes(marker) && positionArr[6].includes(marker)) {
+        playerTurnText.textContent = `${marker} wins`
+        return 
+       } 
+    }
+       
+    }
+    
+
+    // allDivs.forEach(square => square.addEventListener('click', function(e){
          
-        // if (counter % 2 === 0) {
-        //     e.target.textContent = markerO
-        // } else if (counter % 2 !== 0) {
-        //     e.target.textContent = markerX;
-        // }
-
-        //when a marker is cicked, make the array take this marker inside
-        //at the correct index position, corresponding to the board.
-        // markers.forEach(marker => {
-        //     e.target.textContent = marker;    
-        //     if (e.target.innerHTML) {
-        //      e.target.textContent = marker;
-        //      console.log(marker)
-        //     }        
-        // })
-        //positionArr.push(e.target.textContent);
-
-       // console.log(e.target)
-        // for (let i = 0; i < allDivs.length; i++) {
-        //     positionArr[i] = square.textContent;
-        //     console.log(positionArr)
-        // }
-
-        console.log(container.children[1].textContent)
-        
-        //if the counter is even - put first marker, otherwise second
-        // positionArr.forEach((position, index) => {
-        //     let sliced = positionArr.slice(index)
-        //     sliced.push(square.textContent);
-        //         //container.children.textContent)
-        // })
-
-   //console.log(square.textContent);
-    }))
+    // }))
 
 
 
