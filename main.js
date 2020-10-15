@@ -7,12 +7,12 @@
 
     
     const container = document.querySelector('.board');
-    const allDivs = document.querySelectorAll('#board div')
-    //let markers = ['O', 'X'];
+    const allDivs = document.querySelectorAll('.board div')
     const vsDiv = document.querySelector('.versus')
     const vsComputer = document.querySelector('.AI');
     const vsPlayer = document.querySelector('.player');
     const emptyDiv = document.querySelector('.empty');
+    const resetButton = document.querySelector('.reset')
     //const emptyDiv2 = document.querySelector('.another-empty')
     const markerX = 'X'
     const markerO = 'O'
@@ -25,6 +25,7 @@
         container.classList.toggle('removed')
     emptyDiv.classList.toggle('removed')
     vsDiv.classList.toggle('removed')
+    resetButton.classList.toggle('removed')
 
     })
     
@@ -34,8 +35,28 @@
 
     container.classList.toggle('removed')
     emptyDiv.classList.toggle('removed')
+    resetButton.classList.toggle('removed')
 
+    container.addEventListener('click', game);
+
+    resetButton.addEventListener('click', () => {
+        counter = 0;
+        for (let i = 0; i < container.children.length; i++) {
+            container.children[i].textContent = '';
+        }
+        //container.children.textContent = ''
+        
+        positionArr = ['','','',
+                       '','','',
+                       '','',''];
+       playerTurnText.textContent = 'X turn';
+       container.addEventListener('click', game);
+        
+    })
+    
     function game(e) {
+       
+
         if (e.target.textContent === '') {
             //e.preventDefault();
             counter++
@@ -64,10 +85,9 @@
         if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
             container.removeEventListener('click', game);
         }
+        
     }
 
-    container.addEventListener('click', game);
-    
     function winCondition(marker) {
         if (!positionArr.includes('')) {
 
@@ -101,16 +121,8 @@
         playerTurnText.textContent = `${marker} wins`
         return 
        } 
+    }       
     }
-    
-       
-    }
-    
-    
-    // allDivs.forEach(square => square.addEventListener('click', function(e){
-         
-    // }))
-
 
 
      //return {}
