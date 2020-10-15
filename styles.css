@@ -12,10 +12,19 @@ body {
 
 }
 
+#top :first-child {
+    text-align: center;
+}
+
+#top {
+    margin-bottom: 85px;
+}
+
 h1 {
      /* grid-area: x;  */
     justify-self: center;
-    margin-bottom: 80px;
+    margin-bottom: 0;
+    
 }
 
 .versus {
@@ -62,7 +71,7 @@ h1 {
 
 #one {
     grid-area: a;
-    border: solid black .1px;
+    border: solid black 1.5px;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -72,7 +81,7 @@ h1 {
 #two {
     grid-area: b;
     /* background-color: rgba(128, 128, 128, 0.452);  */
-    border: solid black .1px;
+    border: solid black 1.5px;
     border-top: none;
     border-right: none;
     text-align: center;
@@ -80,7 +89,7 @@ h1 {
 
 #three {
     grid-area: c;
-    border: solid black .1px;
+    border: solid black 1.5px;
     border-top: none;
     border-right: none;
     text-align: center;
@@ -88,7 +97,7 @@ h1 {
 
 #four {
     grid-area: d;
-    border: solid black .1px;
+    border: solid black 1.5px;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -97,7 +106,7 @@ h1 {
 
 #five {
     grid-area: e;
-    border: solid black .1px;
+    border: solid black 1.5px;
     border-top: none;
     border-right: none;
     text-align: center;
@@ -105,7 +114,7 @@ h1 {
 
 #six {
     grid-area: f;
-    border: solid black .1px;
+    border: solid black 1.5px;
     border-top: none;
     border-right: none;
     text-align: center;
@@ -113,7 +122,7 @@ h1 {
 
 #seven {
     grid-area: g;
-    border: solid black .1px;
+    border: solid black 1.5px;
     border-top: none;
     border-bottom: none;
     border-left: none;
@@ -123,7 +132,7 @@ h1 {
 
 #eight {
     grid-area: h;
-    border: solid black .1px;
+    border: solid black 1.5px;
     border-top: none;
     border-bottom: none;
     border-right: none;
@@ -132,7 +141,7 @@ h1 {
 
 #nine {
     grid-area: i;
-    border: solid black .1px;
+    border: solid black 1.5px;
     border-top: none;
     border-bottom: none;
     border-right: none;
