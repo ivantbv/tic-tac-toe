@@ -35,10 +35,7 @@
     container.classList.toggle('removed')
     emptyDiv.classList.toggle('removed')
 
-    container.addEventListener('click', (e) => {
-        //let dataEl = document.querySelectorAll(`div[data-num]`)
-        //let dataEl = document.querySelectorAll('.square[data-num]')
-        
+    function game(e) {
         if (e.target.textContent === '') {
             //e.preventDefault();
             counter++
@@ -63,10 +60,15 @@
 
         winCondition(markerO);
         winCondition(markerX);
-        
-    }) 
+
+        if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
+            container.removeEventListener('click', game);
+        }
+    }
+
+    container.addEventListener('click', game);
     
-    function winCondition(marker, event) {
+    function winCondition(marker) {
         if (!positionArr.includes('')) {
 
             playerTurnText.textContent = 'Its a tie'
@@ -100,10 +102,11 @@
         return 
        } 
     }
+    
        
     }
     
-
+    
     // allDivs.forEach(square => square.addEventListener('click', function(e){
          
     // }))
