@@ -13,6 +13,7 @@
     const vsPlayer = document.querySelector('.player');
     const emptyDiv = document.querySelector('.empty');
     const resetButton = document.querySelector('.reset')
+    const backButton = document.querySelector('.back')
     //const emptyDiv2 = document.querySelector('.another-empty')
     const markerX = 'X'
     const markerO = 'O'
@@ -21,13 +22,17 @@
                        '','','',
                        '','',''];
 
-    vsPlayer.addEventListener('click', () => {
+    function toggleRemovedClass() {
         container.classList.toggle('removed')
-    emptyDiv.classList.toggle('removed')
-    vsDiv.classList.toggle('removed')
-    resetButton.classList.toggle('removed')
+        emptyDiv.classList.toggle('removed')
+        vsDiv.classList.toggle('removed')
+        resetButton.classList.toggle('removed')
+        backButton.classList.toggle('removed');
+    }
+    
+    vsPlayer.addEventListener('click', toggleRemovedClass);
 
-    })
+    backButton.addEventListener('click', toggleRemovedClass)
     
     const playerTurnText = document.createElement('span')
     emptyDiv.appendChild(playerTurnText);
@@ -36,6 +41,7 @@
     container.classList.toggle('removed')
     emptyDiv.classList.toggle('removed')
     resetButton.classList.toggle('removed')
+    backButton.classList.toggle('removed');
 
     container.addEventListener('click', game);
 
