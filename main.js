@@ -1,11 +1,7 @@
 //store the gameboard as an array inside of a Gameboard object
 //tuck everything inside of a factory function
 
-//as an option, make the player choose X or O to play
-
- //const Gameboard = (function(){
-
-    
+ //const Gameboard = (function(){    
     const container = document.querySelector('.board');
     const allDivs = document.querySelectorAll('.board div')
     const vsDiv = document.querySelector('.versus')
@@ -56,83 +52,50 @@
 
     resetButton.addEventListener('click', resetBtn);
 
-   
-
     function computerPlay(e) { 
-        if (container.children.textContent !== markerX && container.children.textContent !== markerO && e.target.textContent === '') {
-            // counter++
-        //     if (counter % 2 === 0) {
-        //        // e.target.textContent = markerO
-        //     //container.children[Math.floor(Math.random() * 9)].textContent = markerO
-        //     //document.getElementById('one').textContent = markerO
-            
-        //     counter = 0;
-        //     playerTurnText.textContent = 'X turn'
-        //     emptyDiv.appendChild(playerTurnText);
-            
-          
-        // } else
-         //if (counter % 2 == 0) {
-            
-            
-            e.target.textContent = markerX
-            playerTurnText.textContent = 'O turn'
-            emptyDiv.appendChild(playerTurnText)
-     
+        if (container.children.textContent !== markerX && container.children.textContent !== markerO && e.target.textContent === '') {           
+            setTimeout(function() {
             let emptyIndices = positionArr
           let emptyIn =  emptyIndices.map( function (marker, index) { return{ marker: marker, index: index }})
             .filter(x => x.marker == '')
             .map(x => x.index);
           
-          // Then select a random index from that list
           let computerIndex = emptyIn[Math.floor(Math.random() * emptyIn.length)];
-          console.log(computerIndex)
-          // Finally, set that element to be 'O'
           container.children[computerIndex].textContent = markerO;
+            }, 290);
             //container.children[Math.floor(Math.random() * 9)].textContent= markerO;
             //container.children.textContent = markerX
             //counter = 1;
             playerTurnText.textContent = 'X turn'
             emptyDiv.appendChild(playerTurnText)
+
+            e.target.textContent = markerX
         }
-        // if (container.children.textContent !== markerX && container.children.textContent !== markerO) {
-        //     let emptySquares = positionArr.filter(x => x == '')
-        //     console.log(emptySquares.length)
-        //     container.children[Math.floor(Math.random() * /*unoccupied squares*/ container.children.length)].textContent = markerO
-            
-        //     playerTurnText.textContent = 'X turn'
-        //     emptyDiv.appendChild(playerTurnText)
-        // }
-    //}
-        //return
-         //container.children[Math.floor(Math.random() * container.children.length)]
+        
     }
     
     function game(e) {
 
         if (AI == true && human == false) {
 //////////////////
+
            computerPlay(e)
            
-           
            for (let i = 0; i < positionArr.length; i++) {    
-            positionArr[i] = container.children[i].textContent
-                
+            positionArr[i] = container.children[i].textContent 
             }
-           winCondition(markerO);
-           winCondition(markerX);
-   
+           
+            winCondition(markerO);
+            winCondition(markerX);
            if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
                container.removeEventListener('click', game);
            }
          
-///////////////////////
-            
+///////////////////////   
             
         } else if (AI == false && human == true) {
        
         if (e.target.textContent === '') {
-            //e.preventDefault();
             counter++
             if (counter % 2 === 0) {
             e.target.textContent = markerO
