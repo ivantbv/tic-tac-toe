@@ -76,24 +76,33 @@
             
             
             e.target.textContent = markerX
-           
+            playerTurnText.textContent = 'O turn'
+            emptyDiv.appendChild(playerTurnText)
      
-            
+            let emptyIndices = positionArr
+          let emptyIn =  emptyIndices.map( function (marker, index) { return{ marker: marker, index: index }})
+            .filter(x => x.marker == '')
+            .map(x => x.index);
+          
+          // Then select a random index from that list
+          let computerIndex = emptyIn[Math.floor(Math.random() * emptyIn.length)];
+          console.log(computerIndex)
+          // Finally, set that element to be 'O'
+          container.children[computerIndex].textContent = markerO;
             //container.children[Math.floor(Math.random() * 9)].textContent= markerO;
             //container.children.textContent = markerX
             //counter = 1;
             playerTurnText.textContent = 'X turn'
             emptyDiv.appendChild(playerTurnText)
         }
-
-        if (container.children.textContent !== markerX && container.children.textContent !== markerO) {
-            let emptySquares = positionArr.filter(x => x == '')
-            console.log(emptySquares.length)
-            container.children[Math.floor(Math.random() * /*unoccupied squares*/ emptySquares.length)].textContent = markerO
+        // if (container.children.textContent !== markerX && container.children.textContent !== markerO) {
+        //     let emptySquares = positionArr.filter(x => x == '')
+        //     console.log(emptySquares.length)
+        //     container.children[Math.floor(Math.random() * /*unoccupied squares*/ container.children.length)].textContent = markerO
             
-            playerTurnText.textContent = 'X turn'
-            emptyDiv.appendChild(playerTurnText)
-        }
+        //     playerTurnText.textContent = 'X turn'
+        //     emptyDiv.appendChild(playerTurnText)
+        // }
     //}
         //return
          //container.children[Math.floor(Math.random() * container.children.length)]
@@ -102,20 +111,21 @@
     function game(e) {
 
         if (AI == true && human == false) {
-            console.log('TERMINATOR')
 //////////////////
            computerPlay(e)
-     
-            for (let i = 0; i < positionArr.length; i++) {    
+           
+           
+           for (let i = 0; i < positionArr.length; i++) {    
             positionArr[i] = container.children[i].textContent
+                
             }
-    
-            winCondition(markerO);
-            winCondition(markerX);
-    
-            if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
-                container.removeEventListener('click', game);
-            }
+           winCondition(markerO);
+           winCondition(markerX);
+   
+           if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
+               container.removeEventListener('click', game);
+           }
+         
 ///////////////////////
             
             
