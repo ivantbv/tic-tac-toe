@@ -17,22 +17,31 @@
     //const emptyDiv2 = document.querySelector('.another-empty')
     const markerX = 'X'
     const markerO = 'O'
+    const markersArr = ['X', 'O']
+    let AI = false;
+    let human = false;
     let counter = 0;
     let positionArr = ['','','',
                        '','','',
                        '','',''];
-
-    function toggleRemovedClass() {
-        container.classList.toggle('removed')
-        emptyDiv.classList.toggle('removed')
-        vsDiv.classList.toggle('removed')
-        resetButton.classList.toggle('removed')
-        backButton.classList.toggle('removed');
-    }
     
-    vsPlayer.addEventListener('click', toggleRemovedClass);
+    vsPlayer.addEventListener('click', () => {
+        human = true;
+        AI = false;
+        toggleRemovedClass()
+        resetBtn();
+    } );
 
     backButton.addEventListener('click', toggleRemovedClass)
+
+    vsComputer.addEventListener('click', () => {
+        AI = true;
+        human = false;
+        toggleRemovedClass()
+
+        resetBtn();
+
+    } )
     
     const playerTurnText = document.createElement('span')
     emptyDiv.appendChild(playerTurnText);
@@ -45,24 +54,73 @@
 
     container.addEventListener('click', game);
 
-    resetButton.addEventListener('click', () => {
-        counter = 0;
-        for (let i = 0; i < container.children.length; i++) {
-            container.children[i].textContent = '';
+    resetButton.addEventListener('click', resetBtn);
+
+   
+
+    function computerPlay(e) { 
+        if (container.children.textContent !== markerX && container.children.textContent !== markerO && e.target.textContent === '') {
+            // counter++
+        //     if (counter % 2 === 0) {
+        //        // e.target.textContent = markerO
+        //     //container.children[Math.floor(Math.random() * 9)].textContent = markerO
+        //     //document.getElementById('one').textContent = markerO
+            
+        //     counter = 0;
+        //     playerTurnText.textContent = 'X turn'
+        //     emptyDiv.appendChild(playerTurnText);
+            
+          
+        // } else
+         //if (counter % 2 == 0) {
+            
+            
+            e.target.textContent = markerX
+           
+     
+            
+            //container.children[Math.floor(Math.random() * 9)].textContent= markerO;
+            //container.children.textContent = markerX
+            //counter = 1;
+            playerTurnText.textContent = 'X turn'
+            emptyDiv.appendChild(playerTurnText)
         }
-        //container.children.textContent = ''
-        
-        positionArr = ['','','',
-                       '','','',
-                       '','',''];
-       playerTurnText.textContent = 'X turn';
-       container.addEventListener('click', game);
-        
-    })
+
+        if (container.children.textContent !== markerX && container.children.textContent !== markerO) {
+            let emptySquares = positionArr.filter(x => x == '')
+            console.log(emptySquares.length)
+            container.children[Math.floor(Math.random() * /*unoccupied squares*/ emptySquares.length)].textContent = markerO
+            
+            playerTurnText.textContent = 'X turn'
+            emptyDiv.appendChild(playerTurnText)
+        }
+    //}
+        //return
+         //container.children[Math.floor(Math.random() * container.children.length)]
+    }
     
     function game(e) {
-       
 
+        if (AI == true && human == false) {
+            console.log('TERMINATOR')
+//////////////////
+           computerPlay(e)
+     
+            for (let i = 0; i < positionArr.length; i++) {    
+            positionArr[i] = container.children[i].textContent
+            }
+    
+            winCondition(markerO);
+            winCondition(markerX);
+    
+            if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
+                container.removeEventListener('click', game);
+            }
+///////////////////////
+            
+            
+        } else if (AI == false && human == true) {
+       
         if (e.target.textContent === '') {
             //e.preventDefault();
             counter++
@@ -91,6 +149,7 @@
         if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
             container.removeEventListener('click', game);
         }
+    }
         
     }
 
@@ -104,7 +163,6 @@
         if (positionArr[0].includes(marker) && positionArr[1].includes(marker) && positionArr[2].includes(marker)) {
              playerTurnText.textContent = `${marker} wins`
              return;
-            //`${marker} wins` //make a pop-up window with ${marker} wins
         } else if (positionArr[0].includes(marker) && positionArr[3].includes(marker) && positionArr[6].includes(marker)) {
             playerTurnText.textContent = `${marker} wins`
             return;
@@ -130,7 +188,26 @@
     }       
     }
 
+    function toggleRemovedClass() {
+        container.classList.toggle('removed')
+        emptyDiv.classList.toggle('removed')
+        vsDiv.classList.toggle('removed')
+        resetButton.classList.toggle('removed')
+        backButton.classList.toggle('removed');
+    }
 
+    function resetBtn() {
+        counter = 0;
+        for (let i = 0; i < container.children.length; i++) {
+            container.children[i].textContent = '';
+        }
+        
+        positionArr = ['','','',
+                       '','','',
+                       '','',''];
+       playerTurnText.textContent = 'X turn';
+       container.addEventListener('click', game);
+    }
      //return {}
     //private function convention - start with a '_'
  //})()
