@@ -14,16 +14,22 @@ body {
 
 #top :first-child {
     text-align: center;
+    
 }
 
 #top {
     margin-bottom: 85px;
 }
 
+#top :last-child {
+    cursor: pointer;
+}
+
 h1 {
      /* grid-area: x;  */
     justify-self: center;
     margin-bottom: 0;
+    font-family: sans-serif;
     
 }
 
@@ -39,6 +45,24 @@ h1 {
     /* align-self: center; */
     border: 3px rgba(99, 96, 96, 0.829) solid;
 
+}
+
+.versus-icons {
+    display: flex;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+.AI, .player {
+    cursor: pointer;
+    font-family: sans-serif;
+    border: 2px solid rgba(49, 49, 49, 0.911);
+    padding: 7px;
+}
+
+.player {
+    width: 120px;
+    text-align: center;
 }
 
 .board {
@@ -153,9 +177,11 @@ h1 {
     /* grid-area: y; */
         margin-top: 80px;
     height: 50px;
-    width: 100px;
     justify-self: center;
     text-align: center;
+    display: flex;
+    font-size: 30px;
+    font-family: sans-serif;
 }
 
 /* .another-empty {
@@ -167,4 +193,12 @@ h1 {
 .removed {
     display: none;
     /* display: none; */
+}
+
+.reset {
+    justify-self: center;
+}
+
+.reset:hover {
+    cursor: pointer;
 }
