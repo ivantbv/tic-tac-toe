@@ -52,12 +52,10 @@
 
     resetButton.addEventListener('click', resetBtn);
 
-    function computerPlay(e) { 
+    function computerPlay(e, mark) { 
         if (container.children.textContent !== markerX && container.children.textContent !== markerO && e.target.textContent === '') { 
           
             e.target.textContent = markerX;
-            
-            
                 for (let i = 0; i < positionArr.length; i++) {    
               positionArr[i] = container.children[i].textContent 
               }
@@ -66,17 +64,15 @@
             let emptyIn =  emptyIndices.map( function (marker, index) { return{ marker: marker, index: index }})
               .filter(x => x.marker === '')
               .map(x => x.index);
+              
               let computerIndex = emptyIn[Math.floor(Math.random() * emptyIn.length)];
                     
               winCondition(markerO);
               winCondition(markerX);
-
-            playerTurnText.textContent === 'X wins' ? container.children[computerIndex].textContent = '' : container.children[computerIndex].textContent = markerO;
+            playerTurnText.textContent === 'X wins' ? container.children[computerIndex].textContent = '' : container.children[computerIndex].textContent = mark;
            
             playerTurnText.textContent = 'X turn'
               emptyDiv.appendChild(playerTurnText)
-              
-              
               
           }
         
@@ -85,14 +81,11 @@
     function game(e) {
 
         if (AI == true && human == false) {
-//////////////////
-          computerPlay(e)
+          computerPlay(e, markerO)
            for (let i = 0; i < positionArr.length; i++) {   
-                positionArr[i] = container.children[i].textContent 
-          
-            
+                positionArr[i] = container.children[i].textContent
             }
-           
+
             winCondition(markerO);
             winCondition(markerX);
 
