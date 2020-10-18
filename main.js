@@ -53,24 +53,32 @@
     resetButton.addEventListener('click', resetBtn);
 
     function computerPlay(e) { 
-        if (container.children.textContent !== markerX && container.children.textContent !== markerO && e.target.textContent === '') {           
-            setTimeout(function() {
-            let emptyIndices = positionArr
-          let emptyIn =  emptyIndices.map( function (marker, index) { return{ marker: marker, index: index }})
-            .filter(x => x.marker == '')
-            .map(x => x.index);
+        if (container.children.textContent !== markerX && container.children.textContent !== markerO && e.target.textContent === '') { 
           
-          let computerIndex = emptyIn[Math.floor(Math.random() * emptyIn.length)];
-          container.children[computerIndex].textContent = markerO;
-            }, 290);
-            //container.children[Math.floor(Math.random() * 9)].textContent= markerO;
-            //container.children.textContent = markerX
-            //counter = 1;
-            playerTurnText.textContent = 'X turn'
-            emptyDiv.appendChild(playerTurnText)
+            e.target.textContent = markerX;
+            
+            
+                for (let i = 0; i < positionArr.length; i++) {    
+              positionArr[i] = container.children[i].textContent 
+              }
+         
+              let emptyIndices = positionArr
+            let emptyIn =  emptyIndices.map( function (marker, index) { return{ marker: marker, index: index }})
+              .filter(x => x.marker === '')
+              .map(x => x.index);
+              let computerIndex = emptyIn[Math.floor(Math.random() * emptyIn.length)];
+                    
+              winCondition(markerO);
+              winCondition(markerX);
 
-            e.target.textContent = markerX
-        }
+            playerTurnText.textContent === 'X wins' ? container.children[computerIndex].textContent = '' : container.children[computerIndex].textContent = markerO;
+           
+            playerTurnText.textContent = 'X turn'
+              emptyDiv.appendChild(playerTurnText)
+              
+              
+              
+          }
         
     }
     
@@ -78,18 +86,21 @@
 
         if (AI == true && human == false) {
 //////////////////
-
-           computerPlay(e)
-           
-           for (let i = 0; i < positionArr.length; i++) {    
-            positionArr[i] = container.children[i].textContent 
+          computerPlay(e)
+           for (let i = 0; i < positionArr.length; i++) {   
+                positionArr[i] = container.children[i].textContent 
+          
+            
             }
            
             winCondition(markerO);
             winCondition(markerX);
+
            if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
                container.removeEventListener('click', game);
            }
+
+         
          
 ///////////////////////   
             
@@ -127,38 +138,68 @@
     }
 
     function winCondition(marker) {
-        if (!positionArr.includes('')) {
-
-            playerTurnText.textContent = 'Its a tie'
-           return
-       } else {
-       // let winCond1 = [positionArr[0].includes(marker), positionArr[1].includes(marker), positionArr[2].includes(marker)]
+        let childArr = [];
+        for (let i = 0; i < container.children.length; i++) {
+            childArr.push(container.children[i].textContent);
+        }
+    
+       if (childArr.includes('')){
+        
         if (positionArr[0].includes(marker) && positionArr[1].includes(marker) && positionArr[2].includes(marker)) {
-             playerTurnText.textContent = `${marker} wins`
-             return;
-        } else if (positionArr[0].includes(marker) && positionArr[3].includes(marker) && positionArr[6].includes(marker)) {
             playerTurnText.textContent = `${marker} wins`
-            return;
-       } else if (positionArr[1].includes(marker) && positionArr[4].includes(marker) && positionArr[7].includes(marker)) {
-        playerTurnText.textContent = `${marker} wins`
-        return
-       } else if (positionArr[2].includes(marker) && positionArr[5].includes(marker) && positionArr[8].includes(marker)) {
-        playerTurnText.textContent = `${marker} wins`
-        return 
-       } else if (positionArr[3].includes(marker) && positionArr[4].includes(marker) && positionArr[5].includes(marker)) {
-        playerTurnText.textContent = `${marker} wins`
-        return
-       } else if (positionArr[6].includes(marker) && positionArr[7].includes(marker) && positionArr[8].includes(marker)) {
-        playerTurnText.textContent = `${marker} wins`
-        return 
-       } else if (positionArr[0].includes(marker) && positionArr[4].includes(marker) && positionArr[8].includes(marker)) {
-        playerTurnText.textContent = `${marker} wins`
-        return 
-       } else if (positionArr[2].includes(marker) && positionArr[4].includes(marker) && positionArr[6].includes(marker)) {
-        playerTurnText.textContent = `${marker} wins`
-        return 
-       } 
-    }       
+       } else if (positionArr[0].includes(marker) && positionArr[3].includes(marker) && positionArr[6].includes(marker)) {
+           playerTurnText.textContent = `${marker} wins`
+         
+      } else if (positionArr[1].includes(marker) && positionArr[4].includes(marker) && positionArr[7].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+    
+      } else if (positionArr[2].includes(marker) && positionArr[5].includes(marker) && positionArr[8].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+      
+      } else if (positionArr[3].includes(marker) && positionArr[4].includes(marker) && positionArr[5].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+     
+      } else if (positionArr[6].includes(marker) && positionArr[7].includes(marker) && positionArr[8].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+    
+      } else if (positionArr[0].includes(marker) && positionArr[4].includes(marker) && positionArr[8].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+      
+      } else if (positionArr[2].includes(marker) && positionArr[4].includes(marker) && positionArr[6].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+      }  
+    } else if (!childArr.includes('')) {
+        fullBoardWinConditions(marker)
+       
+    }
+    }
+
+    function fullBoardWinConditions(marker) {
+        if (positionArr[0].includes(marker) && positionArr[1].includes(marker) && positionArr[2].includes(marker)) {
+            playerTurnText.textContent = `${marker} wins`
+       } else if (positionArr[0].includes(marker) && positionArr[3].includes(marker) && positionArr[6].includes(marker)) {
+           playerTurnText.textContent = `${marker} wins`
+         
+      } else if (positionArr[1].includes(marker) && positionArr[4].includes(marker) && positionArr[7].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+    
+      } else if (positionArr[2].includes(marker) && positionArr[5].includes(marker) && positionArr[8].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+      
+      } else if (positionArr[3].includes(marker) && positionArr[4].includes(marker) && positionArr[5].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+     
+      } else if (positionArr[6].includes(marker) && positionArr[7].includes(marker) && positionArr[8].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+    
+      } else if (positionArr[0].includes(marker) && positionArr[4].includes(marker) && positionArr[8].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+      
+      } else if (positionArr[2].includes(marker) && positionArr[4].includes(marker) && positionArr[6].includes(marker)) {
+       playerTurnText.textContent = `${marker} wins`
+      }  else {
+        playerTurnText.textContent = 'Its a tie'
+      }
     }
 
     function toggleRemovedClass() {
