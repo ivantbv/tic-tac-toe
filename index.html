@@ -14,7 +14,7 @@
         <!-- <button class="back">Back</button> -->
         </div>
         <div class="versus">
-            <div class="AI">Player vs. Computer
+            <div class="AI">Player vs Computer
                 <div class="versus-icons">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -41,7 +41,17 @@
                 </div>
             </div>
         </div>
-        
+
+        <div class="board-container">
+            <div class="player-mark">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <circle cx="12" cy="7" r="4" />
+                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                  </svg>
+                  <p id="current-mark-player">X</p>
+                </div>
+         
         <div class="board">
             <div class="square" id="one"></div>
             <div class="square"  id="two"></div>
@@ -53,9 +63,20 @@
             <div class="square"  id="eight"></div>
             <div class="square"  id="nine"></div>
         </div>
-        <!-- <div class="another-empty"></div> -->
+        <div id="robot-mark">
+            <svg viewBox="0 0 15 15" fill="none"  xmlns="http://www.w3.org/2000/svg" width="30" height="30"><path d="M7.5 2.5a5 5 0 015 5v6a1 1 0 01-1 1h-8a1 1 0 01-1-1v-6a5 5 0 015-5zm0 0V0M4 11.5h7M.5 8v4m14-4v4m-9-2.5a1 1 0 110-2 1 1 0 010 2zm4 0a1 1 0 110-2 1 1 0 010 2z" stroke="currentColor"></path></svg>
+            <p id="current-mark-robot">O</p>
+        </div>
+        <div class="player-mark removed" id="second-player-mark">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="30" height="30" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <circle cx="12" cy="7" r="4" />
+                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+              </svg>
+              <p id="current-mark-playertwo">O</p>
+            </div>
+    </div>
         <div class="empty"></div>
-        <!-- <button class="reset" title="reset game">Reset</button> -->
         <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="35" height="35" class="reset"><path d="M7.5 14.5A7 7 0 013.17 2M7.5.5A7 7 0 0111.83 13m-.33-3v3.5H15M0 1.5h3.5V5" stroke="currentColor"></path></svg>
         <script src="main.js"></script>
     </body>
