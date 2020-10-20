@@ -152,10 +152,21 @@
                   playerTurnText.textContent = 'O turn'
                 emptyDiv.appendChild(playerTurnText)
               }
-              if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
-                container.removeEventListener('click', game);
-            } 
+            //   if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
+            //     container.removeEventListener('click', game);
 
+                
+            // } 
+            for (let i = 0; i < positionArr.length; i++) {   
+              positionArr[i] = container.children[i].textContent
+          }
+
+          winCondition(markerO);
+          winCondition(markerX);
+
+         if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
+             container.removeEventListener('click', game);
+         } 
             
              } else if (e.target.textContent == markerX) {
             e.target.textContent = markerO
@@ -186,10 +197,19 @@
                 playerTurnText.textContent = 'X turn'
               emptyDiv.appendChild(playerTurnText)
             }
-            if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
-                container.removeEventListener('click', game);
-            } 
-            
+            // if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
+            //     container.removeEventListener('click', game);
+            // } 
+            for (let i = 0; i < positionArr.length; i++) {   
+              positionArr[i] = container.children[i].textContent
+          }
+
+          winCondition(markerO);
+          winCondition(markerX);
+
+         if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
+             container.removeEventListener('click', game);
+         } 
             //e.target.textContent = markerO;
              }
             }
