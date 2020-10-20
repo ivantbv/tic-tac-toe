@@ -112,27 +112,38 @@
         
     }
 
-    currentMarkPlayer1.addEventListener('click', (e) => {
-      if (currentMarkComputer.textContent == markerO) {
-        currentMarkPlayer1.textContent = markerX;
-      } else if (currentMarkComputer.textContent == markerX) {
-        currentMarkPlayer1.textContent = markerO;
-      }
+    currentMarkPlayer1.addEventListener('click', () => {
     })
 
-    currentMarkPlayer2.addEventListener('click', (e) => {
-        
+    currentMarkPlayer2.addEventListener('click', () => {
     })
+
     currentMarkComputer.addEventListener('click', (e) => {
         //resetBtn();
+        if(!positionArr.includes('') || playerTurnText.textContent == 'X wins' || playerTurnText.textContent == 'O wins' || playerTurnText.textContent == 'Its a tie') {
+          if (e.target.textContent == markerO) {
+            e.target.textContent = markerX
+            currentMarkPlayer1.textContent = markerO;
+            currentMarkPlayer2.textContent = markerX;
+          } else if (e.target.textContent == markerX) {
+            e.target.textContent = markerO
+            currentMarkPlayer1.textContent = markerX;
+            currentMarkPlayer2.textContent = markerO;
+          }
+        }
+
     if (playerTurnText.textContent !== 'X wins' && playerTurnText.textContent !== 'O wins' && playerTurnText.textContent !== 'Its a tie') {
        
         if (e.target.textContent == markerO) {
             e.target.textContent = markerX
+            currentMarkPlayer1.textContent = markerO;
+            currentMarkPlayer2.textContent = markerX;
           computerTurnSwitch(markerX, 'O')
             
              } else if (e.target.textContent == markerX) {
             e.target.textContent = markerO
+            currentMarkPlayer1.textContent = markerX;
+            currentMarkPlayer2.textContent = markerO;
               computerTurnSwitch(markerO, 'X')
             }
       }
@@ -304,8 +315,13 @@
                 emptyDiv.appendChild(playerTurnText)
               }
         }
+
+        if (AI == false && currentMarkPlayer1.textContent == markerO) {
+          playerTurnText.textContent = 'X turn'
+        } else {
       currentMarkComputer.textContent == markerO ? playerTurnText.textContent = 'X turn' : playerTurnText.textContent = 'O turn';
-       container.addEventListener('click', game);
+        } 
+      container.addEventListener('click', game);
     }
 
 
