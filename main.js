@@ -112,107 +112,41 @@
         
     }
 
-    currentMarkPlayer1.addEventListener('click', (e) => {
+    currentMarkPlayer1.addEventListener('click', () => {
     })
 
-    currentMarkPlayer2.addEventListener('click', (e) => {
-        
+    currentMarkPlayer2.addEventListener('click', () => {
     })
+
     currentMarkComputer.addEventListener('click', (e) => {
         //resetBtn();
+        if(!positionArr.includes('') || playerTurnText.textContent == 'X wins' || playerTurnText.textContent == 'O wins' || playerTurnText.textContent == 'Its a tie') {
+          if (e.target.textContent == markerO) {
+            e.target.textContent = markerX
+            currentMarkPlayer1.textContent = markerO;
+            currentMarkPlayer2.textContent = markerX;
+          } else if (e.target.textContent == markerX) {
+            e.target.textContent = markerO
+            currentMarkPlayer1.textContent = markerX;
+            currentMarkPlayer2.textContent = markerO;
+          }
+        }
+
     if (playerTurnText.textContent !== 'X wins' && playerTurnText.textContent !== 'O wins' && playerTurnText.textContent !== 'Its a tie') {
        
         if (e.target.textContent == markerO) {
-  
             e.target.textContent = markerX
-            //currentMarkPlayer1.textContent = markerO;
-            //emptyDiv.textContent = 'X turn'
-            for (let i = 0; i < positionArr.length; i++) {    
-                positionArr[i] = container.children[i].textContent 
-                }
-           
-                let emptyIndices = positionArr
-              let emptyIn =  emptyIndices.map( function (marker, index) { return{ marker: marker, index: index }})
-                .filter(x => x.marker === '')
-                .map(x => x.index);
-                
-                let computerIndex = emptyIn[Math.floor(Math.random() * emptyIn.length)];
-                      
-                winCondition(markerO);
-                winCondition(markerX);
-              playerTurnText.textContent === 'X wins' ? container.children[computerIndex].textContent = '' : container.children[computerIndex].textContent = markerX;
-                
-              if (playerTurnText.textContent == 'X wins') {
-              playerTurnText.textContent = 'X wins'
-                emptyDiv.appendChild(playerTurnText)
-              } else if (playerTurnText.textContent == 'O wins') {
-                  playerTurnText.textContent = 'O wins'
-                emptyDiv.appendChild(playerTurnText)
-              } else {
-                  playerTurnText.textContent = 'O turn'
-                emptyDiv.appendChild(playerTurnText)
-              }
-            //   if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
-            //     container.removeEventListener('click', game);
-
-                
-            // } 
-            for (let i = 0; i < positionArr.length; i++) {   
-              positionArr[i] = container.children[i].textContent
-          }
-
-          winCondition(markerO);
-          winCondition(markerX);
-
-         if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
-             container.removeEventListener('click', game);
-         } 
+            currentMarkPlayer1.textContent = markerO;
+            currentMarkPlayer2.textContent = markerX;
+          computerTurnSwitch(markerX, 'O')
             
              } else if (e.target.textContent == markerX) {
             e.target.textContent = markerO
-           // computerPlay(e, markerO)
-            //emptyDiv.textContent = 'O turn'
-            for (let i = 0; i < positionArr.length; i++) {    
-                positionArr[i] = container.children[i].textContent 
-                }
-
-            let emptyIndices = positionArr
-            let emptyIn =  emptyIndices.map( function (marker, index) { return{ marker: marker, index: index }})
-              .filter(x => x.marker === '')
-              .map(x => x.index);
-              
-              let computerIndex = emptyIn[Math.floor(Math.random() * emptyIn.length)];
-                    
-              winCondition(markerO);
-              winCondition(markerX);
-            playerTurnText.textContent === 'X wins' ? container.children[computerIndex].textContent = '' : container.children[computerIndex].textContent = markerO;
-              
-            if (playerTurnText.textContent == 'X wins') {
-            playerTurnText.textContent = 'X wins'
-              emptyDiv.appendChild(playerTurnText)
-            } else if (playerTurnText.textContent == 'O wins') {
-                playerTurnText.textContent = 'O wins'
-              emptyDiv.appendChild(playerTurnText)
-            } else {
-                playerTurnText.textContent = 'X turn'
-              emptyDiv.appendChild(playerTurnText)
+            currentMarkPlayer1.textContent = markerX;
+            currentMarkPlayer2.textContent = markerO;
+              computerTurnSwitch(markerO, 'X')
             }
-            // if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
-            //     container.removeEventListener('click', game);
-            // } 
-            for (let i = 0; i < positionArr.length; i++) {   
-              positionArr[i] = container.children[i].textContent
-          }
-
-          winCondition(markerO);
-          winCondition(markerX);
-
-         if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
-             container.removeEventListener('click', game);
-         } 
-            //e.target.textContent = markerO;
-             }
-            }
+      }
     })
     function game(e) {
 
@@ -381,8 +315,47 @@
                 emptyDiv.appendChild(playerTurnText)
               }
         }
-       playerTurnText.textContent = 'X turn';
-       container.addEventListener('click', game);
+
+        if (AI == false && currentMarkPlayer1.textContent == markerO) {
+          playerTurnText.textContent = 'X turn'
+        } else {
+      currentMarkComputer.textContent == markerO ? playerTurnText.textContent = 'X turn' : playerTurnText.textContent = 'O turn';
+        } 
+      container.addEventListener('click', game);
+    }
+
+
+    function computerTurnSwitch(mark, turn) {
+      let emptyIndices = positionArr
+      let emptyIn =  emptyIndices.map( function (marker, index) { return{ marker: marker, index: index }})
+        .filter(x => x.marker === '')
+        .map(x => x.index);
+        
+        let computerIndex = emptyIn[Math.floor(Math.random() * emptyIn.length)];
+              
+      playerTurnText.textContent === 'X wins' ? container.children[computerIndex].textContent = '' : container.children[computerIndex].textContent = mark;
+        
+      if (playerTurnText.textContent == 'X wins') {
+      playerTurnText.textContent = 'X wins'
+        emptyDiv.appendChild(playerTurnText)
+      } else if (playerTurnText.textContent == 'O wins') {
+          playerTurnText.textContent = 'O wins'
+        emptyDiv.appendChild(playerTurnText)
+      } else {
+          playerTurnText.textContent = `${turn} turn`
+        emptyDiv.appendChild(playerTurnText)
+      }
+      
+      for (let i = 0; i < positionArr.length; i++) {   
+        positionArr[i] = container.children[i].textContent
+    }
+
+    winCondition(markerO);
+    winCondition(markerX);
+
+   if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
+       container.removeEventListener('click', game);
+   }
     }
 
      //return {}

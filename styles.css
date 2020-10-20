@@ -210,3 +210,29 @@ h1 {
 .reset:hover {
     cursor: pointer;
 }
+
+#robot-mark {
+    text-align: center;
+}
+
+.player-mark {
+    text-align: center;
+}
+
+#current-mark-player {
+    font-size: 37px;
+    margin-top: 5px;
+    font-family: monospace;
+}
+
+#current-mark-robot {
+    font-size: 37px;
+    margin-top: 5px;
+    font-family: monospace;
+}
+
+#current-mark-playertwo {
+    font-size: 37px;
+    margin-top: 5px;
+    font-family: monospace;
+}
