@@ -68,7 +68,7 @@
 
     function computerPlay(e, mark) { 
         if (container.children.textContent !== markerX && container.children.textContent !== markerO && e.target.textContent === '') { 
-          if (AI == true && currentMarkComputer.textContent == markerX && currentMarkPlayer1.textContent == markerO) {
+          if (AI == true && currentMarkComputer.textContent == markerX) {
             e.target.textContent = markerO;
             for (let i = 0; i < positionArr.length; i++) {    
           positionArr[i] = container.children[i].textContent 
@@ -87,7 +87,7 @@
        
         playerTurnText.textContent = 'O turn'
           emptyDiv.appendChild(playerTurnText)
-          } else if (currentMarkComputer.textContent == markerO && currentMarkPlayer1.textContent == markerX) {
+          } else {
             e.target.textContent = markerX;
                 for (let i = 0; i < positionArr.length; i++) {    
               positionArr[i] = container.children[i].textContent 
@@ -113,25 +113,19 @@
     }
 
     currentMarkPlayer1.addEventListener('click', (e) => {
-        if (e.target.textContent == markerX) {
-            e.target.textContent = markerO
-            currentMarkComputer.textContent = markerX;
-        } else if (e.target.textContent == markerO) {
-            e.target.textContent = markerX
-            currentMarkComputer.textContent = markerO;
-            //computerPlay(e, markerO)
-        }
-        //currentMarkComputer.textContent);
     })
 
     currentMarkPlayer2.addEventListener('click', (e) => {
         
     })
-
     currentMarkComputer.addEventListener('click', (e) => {
+        //resetBtn();
+    if (playerTurnText.textContent !== 'X wins' && playerTurnText.textContent !== 'O wins' && playerTurnText.textContent !== 'Its a tie') {
+       
         if (e.target.textContent == markerO) {
+  
             e.target.textContent = markerX
-            currentMarkPlayer1.textContent = markerO;
+            //currentMarkPlayer1.textContent = markerO;
             //emptyDiv.textContent = 'X turn'
             for (let i = 0; i < positionArr.length; i++) {    
                 positionArr[i] = container.children[i].textContent 
@@ -158,20 +152,48 @@
                   playerTurnText.textContent = 'O turn'
                 emptyDiv.appendChild(playerTurnText)
               }
-            
+              if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
+                container.removeEventListener('click', game);
+            } 
 
             
              } else if (e.target.textContent == markerX) {
             e.target.textContent = markerO
            // computerPlay(e, markerO)
-            currentMarkPlayer1.textContent = markerX;
             //emptyDiv.textContent = 'O turn'
+            for (let i = 0; i < positionArr.length; i++) {    
+                positionArr[i] = container.children[i].textContent 
+                }
 
+            let emptyIndices = positionArr
+            let emptyIn =  emptyIndices.map( function (marker, index) { return{ marker: marker, index: index }})
+              .filter(x => x.marker === '')
+              .map(x => x.index);
+              
+              let computerIndex = emptyIn[Math.floor(Math.random() * emptyIn.length)];
+                    
+              winCondition(markerO);
+              winCondition(markerX);
+            playerTurnText.textContent === 'X wins' ? container.children[computerIndex].textContent = '' : container.children[computerIndex].textContent = markerO;
+              
+            if (playerTurnText.textContent == 'X wins') {
+            playerTurnText.textContent = 'X wins'
+              emptyDiv.appendChild(playerTurnText)
+            } else if (playerTurnText.textContent == 'O wins') {
+                playerTurnText.textContent = 'O wins'
+              emptyDiv.appendChild(playerTurnText)
+            } else {
+                playerTurnText.textContent = 'X turn'
+              emptyDiv.appendChild(playerTurnText)
+            }
+            if (playerTurnText.textContent === 'Its a tie' || playerTurnText.textContent === 'O wins' || playerTurnText.textContent === 'X wins' ) {
+                container.removeEventListener('click', game);
+            } 
+            
             //e.target.textContent = markerO;
              }
-          
+            }
     })
-    
     function game(e) {
 
         if (AI == true && human == false) {
@@ -310,7 +332,7 @@
         positionArr = ['','','',
                        '','','',
                        '','',''];
-        if (AI == true && currentMarkComputer.textContent == markerX && currentMarkPlayer1.textContent == markerO) {
+        if (AI == true && currentMarkComputer.textContent == markerX) {
             playerTurnText.textContent = 'O turn';
 
             for (let i = 0; i < positionArr.length; i++) {    
