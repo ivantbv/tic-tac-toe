@@ -7,6 +7,7 @@ body {
 
 #top :first-child {
     text-align: center;
+    margin-top: 5px;
 }
 
 .back {
@@ -23,9 +24,9 @@ body {
 }
 
 .switch-computer {
+    justify-self: center;
 	box-shadow:inset -50px 50px 35px -30px rgba(212, 194, 152, 0.548);
 	background:linear-gradient(to bottom,rgba(184, 170, 138, 0.568) 5%, rgba(122, 68, 238, 0.678) 100%);
-	background-color:#768d87;
 	border:1px solid #566963;
 	display:inline-block;
 	cursor:pointer;
@@ -37,20 +38,11 @@ body {
     text-shadow:0px 0px 23px #2b665e;
     margin-bottom: 5px;
 }
-.switch-computer {
-	background:linear-gradient(to bottom,rgba(212, 194, 152, 0.644) 5%%, rgba(122, 68, 238, 0.678) 100%);
-	background-color: linear-gradient(to right, rgba(212, 194, 152, 0.644) 0%, rgba(122, 68, 238, 0.678));
-}
+
 .switch-computer:active {
 	position:relative;
 	top:0.2px;
 }      
-
-.switch-computer {
-    width: 130px;
-    justify-self: center;
-    
-}
 
 .switchSvg {
     color: rgba(248, 248, 248, 0.726);
@@ -251,4 +243,15 @@ h1 {
     font-size: 37px;
     margin-top: 5px;
     font-family: monospace;
+}
+
+#github {
+    justify-self: center;
+    margin-top: 150px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.icon-tabler-brand-github {
+    color: black;
 }
