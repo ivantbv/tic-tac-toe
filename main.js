@@ -1,7 +1,4 @@
-//store the gameboard as an array inside of a Gameboard object
-//tuck everything inside of a factory function
-
- //const Gameboard = (function(){    
+const Gameboard = (function(){    
     const container = document.querySelector('.board');
     //const allDivs = document.querySelectorAll('.board div')
     const vsDiv = document.querySelector('.versus')
@@ -15,7 +12,8 @@
     const playerMark2 = document.querySelector('#second-player-mark')
     const currentMarkComputer = document.querySelector('#current-mark-robot');
     const currentMarkPlayer1 = document.querySelector('#current-mark-player');
-    const currentMarkPlayer2 = document.querySelector('#current-mark-playertwo')
+    const currentMarkPlayer2 = document.querySelector('#current-mark-playertwo');
+    const switchMarkers = document.querySelector('.switch-computer');
     const markerX = 'X'
     const markerO = 'O'
     //const markersArr = ['X', 'O']
@@ -61,6 +59,7 @@
     backButton.classList.toggle('removed');
     robotMark.classList.toggle('removed');
     playerMark.classList.toggle('removed');
+    switchMarkers.classList.toggle('removed');
 
     container.addEventListener('click', game);
 
@@ -80,7 +79,6 @@
           
           let computerIndex = emptyIn[Math.floor(Math.random() * emptyIn.length)];
                 
-         
           winCondition(markerO);
           winCondition(markerX);
         playerTurnText.textContent === 'O wins' ? container.children[computerIndex].textContent = '' : container.children[computerIndex].textContent = markerX;
@@ -108,48 +106,40 @@
               emptyDiv.appendChild(playerTurnText)
               
           }
-        }
-        
+        }   
     }
 
-    currentMarkPlayer1.addEventListener('click', () => {
-    })
-
-    currentMarkPlayer2.addEventListener('click', () => {
-    })
-
-    currentMarkComputer.addEventListener('click', (e) => {
-        //resetBtn();
-        if(!positionArr.includes('') || playerTurnText.textContent == 'X wins' || playerTurnText.textContent == 'O wins' || playerTurnText.textContent == 'Its a tie') {
-          if (e.target.textContent == markerO) {
-            e.target.textContent = markerX
-            currentMarkPlayer1.textContent = markerO;
-            currentMarkPlayer2.textContent = markerX;
-          } else if (e.target.textContent == markerX) {
-            e.target.textContent = markerO
-            currentMarkPlayer1.textContent = markerX;
-            currentMarkPlayer2.textContent = markerO;
-          }
+    switchMarkers.addEventListener('click', () => {
+      if(!positionArr.includes('') || playerTurnText.textContent == 'X wins' || playerTurnText.textContent == 'O wins' || playerTurnText.textContent == 'Its a tie') {
+        if (currentMarkComputer.textContent == markerO) {
+          currentMarkComputer.textContent = markerX
+          currentMarkPlayer1.textContent = markerO;
+          currentMarkPlayer2.textContent = markerX;
+        } else if (currentMarkComputer.textContent == markerX) {
+          currentMarkComputer.textContent = markerO
+          currentMarkPlayer1.textContent = markerX;
+          currentMarkPlayer2.textContent = markerO;
         }
-
-    if (playerTurnText.textContent !== 'X wins' && playerTurnText.textContent !== 'O wins' && playerTurnText.textContent !== 'Its a tie') {
-       
-        if (e.target.textContent == markerO) {
-            e.target.textContent = markerX
-            currentMarkPlayer1.textContent = markerO;
-            currentMarkPlayer2.textContent = markerX;
-          computerTurnSwitch(markerX, 'O')
-            
-             } else if (e.target.textContent == markerX) {
-            e.target.textContent = markerO
-            currentMarkPlayer1.textContent = markerX;
-            currentMarkPlayer2.textContent = markerO;
-              computerTurnSwitch(markerO, 'X')
-            }
       }
-    })
-    function game(e) {
 
+  if (playerTurnText.textContent !== 'X wins' && playerTurnText.textContent !== 'O wins' && playerTurnText.textContent !== 'Its a tie') {
+     
+      if (currentMarkComputer.textContent == markerO) {
+          currentMarkComputer.textContent = markerX
+          currentMarkPlayer1.textContent = markerO;
+          currentMarkPlayer2.textContent = markerX;
+        computerTurnSwitch(markerX, 'O')
+          
+           } else if (currentMarkComputer.textContent == markerX) {
+          currentMarkComputer.textContent = markerO
+          currentMarkPlayer1.textContent = markerX;
+          currentMarkPlayer2.textContent = markerO;
+            computerTurnSwitch(markerO, 'X')
+          }
+    }
+    })
+
+    function game(e) {
         if (AI == true && human == false) {
           computerPlay(e, markerO)
            for (let i = 0; i < positionArr.length; i++) {   
@@ -268,9 +258,12 @@
         resetButton.classList.toggle('removed')
         backButton.classList.toggle('removed');
 
+       
+
         if (AI == true && human == false) {
         robotMark.classList.toggle('removed');
         playerMark.classList.toggle('removed');
+        switchMarkers.classList.toggle('removed');
     } else if (human == true && AI == false) {
         playerMark.classList.toggle('removed');
         playerMark2.classList.toggle('removed')
@@ -359,5 +352,4 @@
     }
 
      //return {}
-    //private function convention - start with a '_'
- //})()
+ })()
