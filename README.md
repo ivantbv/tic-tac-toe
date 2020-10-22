@@ -2,6 +2,11 @@
 
 This is a browser Tic Tac Toe game written in vanilla JavaScript that has 2 playing modes - versus the computer and versus another player.
 
+# Code structure
+
+I practiced and used Factory Functions and the Module Pattern. 
+The whole code is wrapped in a Module which has private and public methods, and the ladder gets called.
+
 # User Interface
 
 On the main screen there is a box with 2 choices - play against the computer or against another player.

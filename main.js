@@ -13,6 +13,7 @@ const Gameboard = (function(){
     const currentMarkPlayer1 = document.querySelector('#current-mark-player');
     const currentMarkPlayer2 = document.querySelector('#current-mark-playertwo');
     const switchMarkers = document.querySelector('.switch-computer');
+    const playerTurnText = document.createElement('span')
     const gitHubIcon = document.querySelector('#github');
     const markerX = 'X'
     const markerO = 'O'
@@ -22,7 +23,10 @@ const Gameboard = (function(){
     let positionArr = ['','','',
                        '','','',
                        '','',''];
-    
+    //public
+  const moduleObj = {}
+
+    moduleObj.mainPageOptions = () => {
     vsPlayer.addEventListener('click', () => {
         human = true;
         AI = false;
@@ -30,26 +34,19 @@ const Gameboard = (function(){
         resetBtn();
     } );
 
-    backButton.addEventListener('click', toggleRemovedClass)
-
     vsComputer.addEventListener('click', () => {
         AI = true;
         human = false;
         toggleRemovedClass()
-
         resetBtn();
-        // if (currentMarkComputer.textContent == markerX) {
-        //     playerTurnText.textContent == 'O turn'
-        // } else if (currentMarkComputer.textContent == markerO) {
-        //     playerTurnText.textContent == 'X turn'
-        // }
-
-    } )
+    })
+  }
+     
     
-    const playerTurnText = document.createElement('span')
     emptyDiv.appendChild(playerTurnText);
     playerTurnText.textContent = 'X turn'
 
+    moduleObj.removedDivsMainPage = () => {
     container.classList.toggle('removed')
     emptyDiv.classList.toggle('removed')
     resetButton.classList.toggle('removed')
@@ -57,8 +54,13 @@ const Gameboard = (function(){
     robotMark.classList.toggle('removed');
     playerMark.classList.toggle('removed');
     switchMarkers.classList.toggle('removed');
+  } 
+  
+
+  moduleObj.playPageOptions = () => {
 
     container.addEventListener('click', game);
+    backButton.addEventListener('click', toggleRemovedClass)
     resetButton.addEventListener('click', resetBtn);
 
     switchMarkers.addEventListener('click', () => {
@@ -91,6 +93,8 @@ const Gameboard = (function(){
     }
     })
 
+  }
+     //private functions from here on
     function game(e) {
         if (AI == true && human == false) {
           computerPlay(e, markerO)
@@ -341,5 +345,9 @@ const Gameboard = (function(){
         }
       }   
   }
-     
+     return moduleObj;
  })()
+
+ Gameboard.playPageOptions();
+ Gameboard.mainPageOptions();
+ Gameboard.removedDivsMainPage();
